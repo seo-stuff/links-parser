@@ -1,0 +1,52 @@
+const asyncInterval = async (callback, ms, triesLeft = 5) => {
+    return new Promise((resolve, reject) => {
+        const interval = setInterval(async () => {
+            if (await callback()) {
+                resolve();
+                clearInterval(interval);
+            } else if (triesLeft <= 1) {
+                reject();
+                clearInterval(interval);
+            }
+            triesLeft--;
+        }, ms);
+    });
+};
+
+let links = [];
+const wrapper = async () => {
+    try {
+        await asyncInterval(async function () {
+            console.log('Runs..... ');
+
+
+            const tableLinks = $('.site-link > a');
+            if (tableLinks.length === 0) {
+                console.log("Selector tableLinks is empty");
+                return;
+            }
+
+            for (let selector of tableLinks) {
+                links.push($(selector).text());
+            }
+
+            const pagen = $('.pagination > span').next();
+
+            if (pagen.length === 0) {
+                console.error("Selector pagen is empty");
+                return;
+            }
+            pagen.click();
+
+
+            return;
+        }, 2500, 15); // 15 Кол. повторений (количество страниц с площадками)
+    } catch (e) {
+        console.log('End parse');
+        console.log(links.join('\n')); 
+    }
+    //console.log('Done');
+
+
+};
+wrapper();
