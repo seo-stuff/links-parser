@@ -4,6 +4,9 @@
 ## Описание
 Консольный скрипт для выгрузки площадок с биржи ссылок Miralinks.ru
 
+![Результаты](/images/demo.png)
+![Результаты](/images/demo2.png)
+
 ## Начало работы
 - Скопировать код скрипта
 - Открыть каталог площадок на сайте Miralinks.ru, например, https://www.miralinks.ru/catalog?s_catalog_type=google
