@@ -55,7 +55,8 @@ while (await navigateToNextPage()) {
 }
 
 // Создаем объект Blob с указанием кодировки
-const csvBlob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+//const csvBlob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+const csvBlob = new Blob([csvContent], { type: 'text/csv;charset=windows-1251;' });
 
 // Создаем ссылку для скачивания CSV файла
 const link = document.createElement("a");
