@@ -18,7 +18,7 @@ let articlePrices = [];
 
 const downloadCSV = (filename, data) => {
     // Добавляем заголовки столбцов
-    const csvContent = "data:text/csv;charset=utf-8," + "Site, Traffic per Day, PR-CY, X, Trust, Context Link, Article\n" + data.map(row => row.join(',')).join('\n');
+    const csvContent = "data:text/csv;charset=utf-8," + "Site, Traffic per Day, PR-CY, X, Trust, Article\n" + data.map(row => row.join(',')).join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -75,7 +75,7 @@ const wrapper = async () => {
             pagen.click();
 
             return false; // Продолжаем интервал
-        }, 2500, 3); // 3 Кол. повторений (количество страниц с площадками)
+        }, 2500, 244); // Кол. повторений (количество страниц с площадками)
     } catch (e) {
         console.log('Парсинг завершен');
         console.log(articlePrices.join('\n'));
