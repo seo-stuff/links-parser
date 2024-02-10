@@ -18,7 +18,7 @@ let articlePrices = [];
 
 const downloadCSV = (filename, data) => {
     // Добавляем заголовки столбцов
-    const csvContent = "data:text/csv;charset=utf-8," + "Site, Traffic per Day, PR-CY, X, Trust, Article\n" + data.map(row => row.join(',')).join('\n');
+    const csvContent = "data:text/csv;charset=utf-8," + "Site; Traffic per Day; PR-CY; X; Trust; Article\n" + data.map(row => row.join(';')).join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -61,7 +61,8 @@ const wrapper = async () => {
                 const trust = trustSelector.text().trim(); // Получаем значение траста
 
                 const articleSelector = $(row).closest('tr').find('td[data-th="Статья"] > div.table__td');
-                const articlePrice = articleSelector.find('.white-space_nowrap').text().trim(); // Получаем значение цены статьи без дополнительных данных
+                const articlePriceText = articleSelector.find('.white-space_nowrap').text().trim(); // Получаем значение цены статьи без дополнительных данных
+                const articlePrice = parseFloat(articlePriceText.replace(/[^\d]/g, '')); // Удаляем все символы, кроме цифр, и преобразуем в число
 
                 articlePrices.push([siteName, traffic, prCy, x, trust, articlePrice]);
             }
