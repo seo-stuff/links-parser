@@ -14,39 +14,58 @@ const asyncInterval = async (callback, ms, triesLeft = 5) => {
 };
 
 let links = [];
+
+const downloadCSV = (filename, data) => {
+    const csvContent = "data:text/csv;charset=utf-8," + data.map(row => row.join(',')).join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+};
+
+const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
 const wrapper = async () => {
     try {
         await asyncInterval(async function () {
-            console.log('Runs..... ');
-
+            console.log('Выполняется...');
 
             const tableLinks = $('.site-link > a');
             if (tableLinks.length === 0) {
-                console.log("Selector tableLinks is empty");
+                console.log("Селектор tableLinks пуст");
                 return;
             }
 
             for (let selector of tableLinks) {
-                links.push($(selector).text());
+                links.push([$(selector).text()]);
             }
 
             const pagen = $('.pagination > span').next();
 
             if (pagen.length === 0) {
-                console.error("Selector pagen is empty");
-                return;
+                console.error("Селектор pagen пуст");
+                return true; // Возвращаем true, чтобы завершить интервал, когда заканчивается пагинация
             }
             pagen.click();
 
-
-            return;
+            return false; // Продолжаем интервал
         }, 2500, 15); // 15 Кол. повторений (количество страниц с площадками)
     } catch (e) {
-        console.log('End parse');
-        console.log(links.join('\n')); 
+        console.log('Парсинг завершен');
+        console.log(links.join('\n'));
     }
-    //console.log('Done');
-
-
+    const currentDate = getCurrentDate();
+    const filename = `data_${currentDate}.csv`;
+    downloadCSV(filename, links);
+    console.log('Готово');
 };
+
 wrapper();
