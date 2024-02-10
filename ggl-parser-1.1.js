@@ -18,7 +18,7 @@ let articlePrices = [];
 
 const downloadCSV = (filename, data) => {
     // Добавляем заголовки столбцов
-    const csvContent = "data:text/csv;charset=utf-8," + "Site; Traffic per Day; PR-CY; X; Trust; Article\n" + data.map(row => row.join(';')).join('\n');
+    const csvContent = "data:text/csv;charset=utf-8," + "Site;Traffic per Day;PR-CY;X;Trust;Article\n" + data.map(row => row.join(';')).join('\n');
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -82,7 +82,7 @@ const wrapper = async () => {
         console.log(articlePrices.join('\n'));
     }
     const currentDate = getCurrentDate();
-    const articlePriceFilename = `data_${currentDate}.csv`;
+    const articlePriceFilename = `ggl_${currentDate}.csv`;
     downloadCSV(articlePriceFilename, articlePrices);
     console.log('Готово');
 };
