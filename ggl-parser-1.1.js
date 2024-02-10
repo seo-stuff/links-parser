@@ -81,7 +81,7 @@ const wrapper = async () => {
         console.log(articlePrices.join('\n'));
     }
     const currentDate = getCurrentDate();
-    const articlePriceFilename = `article_prices_${currentDate}.csv`;
+    const articlePriceFilename = `data_${currentDate}.csv`;
     downloadCSV(articlePriceFilename, articlePrices);
     console.log('Готово');
 };
