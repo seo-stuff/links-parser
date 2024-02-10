@@ -1,5 +1,5 @@
-# miralinks-parser
-Парсер сайтов с биржи ссылок Miralinks
+# Парсеры сайтов с бирж ссылок
+Парсер сайтов с биржи ссылок Miralinks / GoGetLinks
 
 ## Описание
 Консольный скрипт для выгрузки площадок с биржи ссылок [Miralinks.ru](https://www.miralinks.ru/from:437129)
@@ -8,8 +8,10 @@
 ![Результаты](/images/demo.png)
 
 ## Начало работы
-- Скопировать код скрипта
-- Открыть каталог площадок на сайте **[Miralinks.ru](https://www.miralinks.ru/from:437129)**, например, [https://www.miralinks.ru/catalog?s_catalog_type=google](https://www.miralinks.ru/catalog?s_catalog_type=google/from:437129)
+- Скопировать код скрипта нужной биржи
+- Открыть каталог площадок на сайте:
+  - Miralinks.ru: https://www.miralinks.ru/catalog?s_catalog_type=google
+  - GoGetLinks.ru: https://gogetlinks.net/searchSites
 - Отфильтровать по нужным параметрам
 - Нажать **F12** и перейти во вкладку **Console**
 - Вставить код, не забыв указать параметр **const maxPages** в самом начале (кол-во страниц, которые обходит скрипт)
